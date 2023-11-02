@@ -4,6 +4,7 @@
  */
 package mx.itson.pay.entities;
 
+import com.google.gson.Gson;
 import java.util.List;
 import mx.itson.pay.enums.Difficulty;
 
@@ -22,6 +23,18 @@ public class Recipe {
     private int servings;
     private Difficulty difficulty;
     private List<NutritionFact> nutritionFacts;
+    
+    
+    public Recipe deserialize(String json) {
+        Recipe recipe = new Recipe();
+        try {
+            recipe = new Gson().fromJson(json, Recipe.class);
+        } catch (Exception ex) {
+            System.err.println("Ocurrió un error: " + ex.getMessage());
+
+        }
+        return recipe;
+    }
 
     /**
      * @return the name
